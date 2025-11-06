@@ -3,7 +3,7 @@ name: Deploy Google Apps Script
 on:
   push:
     branches:
-      - main  
+      - main
 
 jobs:
   deploy:
@@ -19,12 +19,15 @@ jobs:
           node-version: 18
 
       - name: Install clasp
-        run: npm install -g @google/clasp
+        run: |
+          npm install -g @google/clasp
+          clasp --version
 
       - name: Configure Google credentials
         run: |
-          echo '${{ secrets.CLASP_RC }}' > ~/.clasprc.json
-          cat ~/.clasprc.json | jq .token.access_token
+          echo '${{ secrets.CLASP_RC }}' | jq '{token: .tokens.default}' > ~/.clasprc.json
+          echo "=== Parsed token structure ==="
+          cat ~/.clasprc.json | jq '.token.access_token'
 
       - name: Push code to Google Apps Script
         run: clasp push
