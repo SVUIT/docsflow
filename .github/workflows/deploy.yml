@@ -23,8 +23,8 @@ jobs:
 
       - name: Configure Google credentials
         run: |
-          mkdir -p ~/.clasprc/
           echo '${{ secrets.CLASP_RC }}' > ~/.clasprc.json
+          cat ~/.clasprc.json | jq .token.access_token
 
       - name: Push code to Google Apps Script
         run: clasp push
