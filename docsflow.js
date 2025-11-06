@@ -1,4 +1,4 @@
-function onFormSubmit(e) {
+function docsflowTrigger(e) {
   // Ensure event object and response are valid before proceeding
   if (!e || !e.response) {
     return;
@@ -26,7 +26,7 @@ function onFormSubmit(e) {
 
   Logger.log(payload); // Log the payload for debugging purposes
 
-  const webhookUrl = "https://webhook.site/8a719b54-6063-4a73-86d2-183329820523"; // Webhook URL for sending form data
+  const webhookUrl = "https://on-request-example-fcj534kc2q-uc.a.run.app"; // Webhook URL for sending form data
   
   // Send form data via a POST request to the API
   UrlFetchApp.fetch(webhookUrl, {
